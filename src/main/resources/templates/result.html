@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Reservation Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        .form-section {
+            margin-bottom: 30px;
+        }
+        .form-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            const data = JSON.parse(localStorage.getItem("flightReservationData"));
+            if (data) {
+                document.getElementById("adult1_info").innerHTML = `
+                    성별: ${data.adult1.gender}<br>
+                    이름: ${data.adult1.firstName} ${data.adult1.lastName}<br>
+                    생년월일: ${data.adult1.birthDate}<br>
+                    여권번호: ${data.adult1.passport}<br>
+                    연락처: ${data.adult1.contact}
+                `;
+                document.getElementById("adult2_info").innerHTML = `
+                    성별: ${data.adult2.gender}<br>
+                    이름: ${data.adult2.firstName} ${data.adult2.lastName}<br>
+                    생년월일: ${data.adult2.birthDate}<br>
+                    여권번호: ${data.adult2.passport}<br>
+                    연락처: ${data.adult2.contact}
+                `;
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="form-section">
+    <div class="form-title">성인 1 정보</div>
+    <div id="adult1_info"></div>
+</div>
+
+<div class="form-section">
+    <div class="form-title">성인 2 정보</div>
+    <div id="adult2_info"></div>
+</div>
+
+</body>
+</html>

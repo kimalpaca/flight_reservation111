@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>항공 예약 시스템</title>
+    <style>
+
+        body, h1, h2, h3, p, li, button, select, input {
+            font-family: 'Roboto', Arial, sans-serif; /* Roboto를 모든 텍스트에 적용 */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        .container {
+            background-color: rgba(0, 40, 85, 0.9);
+            border-radius: 20px;
+            padding: 50px;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            align-items: center;
+            gap: 20px;
+            margin-top: 100px; /* 컨테이너 자체에 아래로 이동 */
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        label {
+            color: white;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        select, input, button {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #ffffff;
+        }
+
+        select:focus, input:focus, button:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .btn-reserve {
+            grid-column: span 5;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 30px;
+            grid-column: 5 / 6;
+        }
+
+        .btn-reserve:hover {
+            background-color: #004494;
+        }
+
+        .passenger-popup {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 10;
+            width: 500px;
+        }
+
+        .passenger-popup h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .passenger-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px; /* 각 행 간의 간격 유지 */
+            align-items: center;
+            padding: 10px 0; /* 각 행의 간격 추가 */
+            border-bottom: 1px solid #ddd; /* 각 행 구분선 */
+        }
+
+        .passenger-label {
+            display: flex;
+            flex-direction: column; /* 글씨를 위아래로 정렬 */
+            text-align: left; /* 왼쪽 정렬 */
+            white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+        }
+
+
+        .passenger-label span:first-child {
+            font-size: 20px; /* 메인 텍스트 크기 */
+            font-weight: bold; /* 메인 텍스트 강조 */
+            color: #000; /* 진한 글씨 */
+        }
+
+        .passenger-label span:last-child {
+            font-size: 14px; /* 보조 텍스트 크기 */
+            color: #888; /* 흐린 회색 */
+        }
+
+        .passenger-controls {
+            display: flex;
+            align-items: center;
+            gap: 1px; /* - 버튼, 숫자, + 버튼 간 간격 */
+        }
+
+        .price-info {
+            text-align: left;
+            margin: 80px 0; /* 위아래 간격을 조정 */
+            font-size: 20px;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .price-info ul {
+            list-style-type: none; /* 기본 글머리 제거 */
+            padding-left: 20px;
+        }
+
+        .price-info li {
+            position: relative;
+            margin-bottom: 8px;
+            padding-left: 25px; /* 아이콘과 텍스트 간격 */
+        }
+
+        .price-info li::before {
+            content: '✈️'; /* 비행기 아이콘 */
+            position: absolute;
+            left: 0;
+            font-size: 16px; /* 아이콘 크기 조정 */
+            color: #0056b3; /* 아이콘 색상 */
+        }
+
+
+
+        .passenger-row span {
+            font-size: 16px; /* 글자 크기 유지 */
+            width: 30px;
+            text-align: center;
+        }
+
+        .passenger-row button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            width: 35px; /* 버튼 크기 (정사각형) */
+            height: 35px; /* 버튼 크기 (정사각형) */
+            cursor: pointer;
+            font-size: 18px; /* 버튼 글자 크기 조정 */
+            border-radius: 5px;
+            margin: 0 ; /* 버튼 사이 간격 추가 */
+            padding: 0;
+
+        }
+
+
+        .passenger-row button:hover {
+            background-color: #004494;
+        }
+
+        .popup-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        /*적용버튼*/
+        .popup-actions button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .popup-actions button:hover {
+            background-color: #004494;
+        }
+
+        .images-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            width: 100%;
+            height: 60vh;
+            position: relative;
+        }
+
+        .image-box {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .departure-image {
+            left: 20%;
+            transition: transform 0.5s ease;
+        }
+
+        .destination-image {
+            right: 20%;
+            transition: transform 0.5s ease;
+        }
+
+        .image-box img {
+            width: 100%;
+            border-radius: 10px 10px 0 0; /* 윗부분에만 곡선 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box; /* 패딩/보더 포함 크기 계산 */
+        }
+
+        .image-description {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin-top: 0;
+            line-height: 1.6;
+            color: #333;
+            font-size: 18px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 0 0 10px 10px; /* 아랫부분만 곡선 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            width: 100%; /* 이미지와 동일한 너비 */
+            font-weight: bold; /* 글씨를 진하게 만듭니다 */
+            box-sizing: border-box; /* 패딩/보더 포함 크기 계산 */
+        }
+
+
+        .image-description ul {
+            list-style: none; /* 기본 글머리 제거 */
+            padding: 0;
+            margin: 0;
+        }
+
+        .image-description ul li {
+            position: relative; /* ::before로 아이콘 삽입 */
+            padding-left: 30px; /* 아이콘과 텍스트 간격 */
+            margin-bottom: 10px;
+        }
+
+        .image-description ul li::before {
+            content: ""; /* 이미지 삽입 */
+            position: absolute;
+            top: 50%; /* 텍스트 중간 정렬 */
+            left: 0;
+            transform: translateY(-50%);
+            width: 30px; /* 아이콘 너비 */
+            height: 30px; /* 아이콘 높이 */
+            background-image: url('location-icon.png'); /* 이미지 경로 */
+            background-size: contain; /* 이미지 크기 조정 */
+            background-repeat: no-repeat; /* 반복 제거 */
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="item">
+        <label for="departure">출발지</label>
+        <select id="departure">
+            <option selected disabled>출발지</option>
+            <option value="incheon">ICN 인천</option>
+            <option value="gimpo">GMP 김포</option>
+            <option value="jeju">CJU 제주</option>
+        </select>
+    </div>
+
+    <div class="item">
+        <label for="destination">도착지</label>
+        <select id="destination">
+            <option selected disabled>도착지</option>
+            <option value="danang">다낭</option>
+            <option value="tokyo">도쿄</option>
+            <option value="london">런던</option>
+            <option value="la">LA</option>
+            <option value="paris">파리</option>
+        </select>
+    </div>
+
+    <div class="item">
+        <label for="date">날짜</label>
+        <input type="date" id="date">
+    </div>
+
+    <div class="item">
+        <label for="passengers">인원수</label>
+        <button id="passengersButton">인원수 </button>
+        <div class="passenger-popup" id="passengerPopup">
+            <h3>인원수 </h3>
+            <div class="passenger-row">
+                <div class="passenger-label">
+                    <span>성인</span>
+                    <span>(만 16세 이상)</span>
+                </div>
+                <div class="passenger-controls">
+                    <button onclick="changePassengerCount('adult', -1)">-</button>
+                    <span id="adultCount">0</span>
+                    <button onclick="changePassengerCount('adult', 1)">+</button>
+                </div>
+            </div>
+            <div class="passenger-row">
+                <div class="passenger-label">
+                    <span>청소년</span>
+                    <span>(만 12-15세)</span>
+                </div>
+                <div class="passenger-controls">
+                    <button onclick="changePassengerCount('teen', -1)">-</button>
+                    <span id="teenCount">0</span>
+                    <button onclick="changePassengerCount('teen', 1)">+</button>
+                </div>
+            </div>
+            <div class="passenger-row">
+                <div class="passenger-label">
+                    <span>유아</span>
+                    <span>(만 0-11세)</span>
+                </div>
+
+                <div class="passenger-controls">
+                    <button onclick="changePassengerCount('child', -1)">-</button>
+                    <span id="childCount">0</span>
+                    <button onclick="changePassengerCount('child', 1)">+</button>
+                </div>
+            </div>
+            <div class="price-info">
+                <ul>
+                    <li>성인 1인당 Economy석 가격: 30,000원</li>
+                    <li>청소년 1인당 Economy석 가격: 30,000원</li>
+                    <li>유아 1인당 Economy석 가격: 30,000원</li>
+                </ul>
+
+            </div>
+            <div class="popup-actions">
+                <button onclick="applyPassengerCount()">적용</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="item">
+        <label for="seat">좌석</label>
+        <select id="seat">
+            <option selected disabled>좌석</option>
+            <option value="Economy">Economy</option>
+            <option value="Business">Business</option>
+            <option value="First">First</option>
+        </select>
+    </div>
+
+    <button class="btn-reserve" id="reserveButton">검색하기</button>
+</div>
+
+<div class="images-container" id="imagesContainer">
+    <div class="image-box departure-image" id="departureImage"></div>
+    <div class="image-box destination-image" id="destinationImage"></div>
+</div>
+
+<script>
+    const departureSelect = document.getElementById('departure');
+    const destinationSelect = document.getElementById('destination');
+    const departureImage = document.getElementById('departureImage');
+    const destinationImage = document.getElementById('destinationImage');
+    const passengerPopup = document.getElementById('passengerPopup');
+    const passengersButton = document.getElementById('passengersButton');
+    const adultCountElement = document.getElementById('adultCount');
+    const teenCountElement = document.getElementById('teenCount');
+    const childCountElement = document.getElementById('childCount');
+
+    let adultCount = 0;
+    let teenCount = 0;
+    let childCount = 0;
+
+    passengersButton.addEventListener('click', () => {
+        passengerPopup.style.display = passengerPopup.style.display === 'block' ? 'none' : 'block';
+    });
+
+    function changePassengerCount(type, change) {
+        if (type === 'adult') {
+            adultCount = Math.max(1, adultCount + change);
+            adultCountElement.textContent = adultCount;
+        } else if (type === 'teen') {
+            teenCount = Math.max(0, teenCount + change);
+            teenCountElement.textContent = teenCount;
+        } else if (type === 'child') {
+            childCount = Math.max(0, childCount + change);
+            childCountElement.textContent = childCount;
+        }
+    }
+
+    function applyPassengerCount() {
+        const passengerSummary = `성인 ${adultCount}${teenCount > 0 ? ", 청소년 " + teenCount : ""}${childCount > 0 ? ", 유아 " + childCount : ""}`;
+        passengersButton.textContent = passengerSummary;
+        passengerPopup.style.display = 'none';
+    }
+
+    const departureData = {
+        incheon: {
+            img: 'incheon.jpg',
+            desc: [
+                ' 인천광역시 중구 공항로 271와 제2터미널대로 444',
+                ' 대한민국 최대 규모의 공항.',
+                ' 세계 최고 품질 서비스를 제공하는 공항으로 12년 연속 선정될 정도로 시설이 훌륭하다.'
+            ]
+        },
+        gimpo: {
+            img: 'gimpo.jpg',
+            desc: [
+                ' 국제선: 서울특별시 강서구 하늘길 38 (방화동)',
+                ' 국내선: 서울특별시 강서구 하늘길 111 (공항동)',
+                ' 한국공항공사 관할의 순수 민간공항 중에서도 규모가 가장 큰 공항이다'
+            ]
+        },
+        jeju: {
+            img: 'jeju.jpg',
+            desc: [
+                ' 제주특별자치도 제주시 공항로 2 (용담2동)',
+                ' 운항간격이 매우 짧다',
+                ' 현재 인천국제공항을 제외한 한국의 국제공항 중 운항횟수 및 이용객이 가장 많은 공항'
+            ]
+        }
+    };
+
+    const destinationData = {
+        danang: {
+            img: 'danang.jpg',
+            desc: [
+                '베트남 중부지방에 있는 도시',
+                '랜드마크: 바나힐,미케해변, 썬월드 다낭 아시아 파크 ',
+                '동(Dong) 사용'
+            ]
+        },
+        tokyo: {
+            img: 'tokyo.jpg',
+            desc: [
+                '일본의 수도',
+                '랜드마크: 도쿄타워,센소지사,스카이트리',
+                '엔화(JPY) 사용'
+            ]
+        },
+        london: {
+            img: 'london.jpg',
+            desc: [
+                '영국의 수도',
+                '랜드마크: 버킹엄궁전, 빅벤, 타워브릿지',
+                '파운드(Pound) 사용.'
+            ]
+        },
+        la: {
+            img: 'la.jpg',
+            desc: [
+                '미국 캘리포니아주의 대표 도시',
+                '랜드마크: 할리우드사인,월드디지니 콘서트홀, 스테이플스 센터',
+                '달러(Dollar) 사용'
+            ]
+        },
+        paris: {
+            img: 'paris.jpg',
+            desc: [
+                '프랑스의 수도',
+                '랜드마크: 에펠탑,루브르 박물관,노트르담 대성당',
+                '유로(EUR) 사용'
+            ]
+        }
+    };
+
+    departureSelect.addEventListener('change', () => {
+        const selectedDeparture = departureSelect.value;
+        if (departureData[selectedDeparture]) {
+            const descriptions = departureData[selectedDeparture].desc
+                .map(line => `<li>${line}</li>`)
+                .join('');
+            departureImage.innerHTML = `
+                <img src="${departureData[selectedDeparture].img}" alt="${selectedDeparture}">
+                <div class="image-description">
+                    <ul>${descriptions}</ul>
+                </div>
+            `;
+            departureImage.style.transform = 'translateX(-50px)';
+        } else {
+            departureImage.innerHTML = '';
+            departureImage.style.transform = 'none';
+        }
+    });
+
+    destinationSelect.addEventListener('change', () => {
+        const selectedDestination = destinationSelect.value;
+        if (destinationData[selectedDestination]) {
+            const descriptions = destinationData[selectedDestination].desc
+                .map(line => `<li>${line}</li>`)
+                .join('');
+            destinationImage.innerHTML = `
+                <img src="${destinationData[selectedDestination].img}" alt="${selectedDestination}">
+                <div class="image-description">
+                    <ul>${descriptions}</ul>
+                </div>
+            `;
+            destinationImage.style.transform = 'translateX(50px)';
+        } else {
+            destinationImage.innerHTML = '';
+            destinationImage.style.transform = 'none';
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 리스트</title>
+    <style>
+        /* 기본 스타일 */
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f7f7f7;
+        }
+
+        .ticket-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 20px;
+        }
+
+        .ticket {
+          width: 80%;
+          max-width: 800px;
+          background-color: #ffffff;
+          border: 2px solid #ddd;
+          border-radius: 10px;
+          margin: 10px 0;
+          padding: 20px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          display: flex;
+          flex-direction: column;
+        }
+
+        .ticket-header {
+          display: flex;
+          justify-content: space-between;
+          font-size: 18px;
+          font-weight: bold;
+        }
+
+        .ticket-body {
+          display: flex;
+          justify-content: space-between;
+          padding-top: 15px;
+          font-size: 16px;
+        }
+
+        .ticket-footer {
+          display: flex;
+          justify-content: flex-end;
+          padding-top: 15px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #333;
+        }
+
+        .ticket-info {
+          flex: 1;
+        }
+
+        .ticket-info span {
+          display: block;
+        }
+
+        .booking-button {
+          padding: 10px 20px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        .booking-button:hover {
+          background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="ticket-container">
+    <div class="ticket">
+        <div class="ticket-header">
+            <div>진에어 (JL0265)</div>
+            <div>2024.12.04 (수)</div>
+        </div>
+        <div class="ticket-body">
+            <div class="ticket-info">
+                <span><strong>출발:</strong> 17:20 ICN</span>
+                <span><strong>도착:</strong> 18:45 FUK</span>
+                <span><strong>소요시간:</strong> 1시간 25분</span>
+            </div>
+            <div class="ticket-info">
+                <span><strong>운항 상태:</strong> 확인필요</span>
+                <span><strong>무료수하물:</strong> 15.0kg</span>
+            </div>
+        </div>
+        <div class="ticket-footer">
+            <button class="booking-button">예약하기</button>
+        </div>
+    </div>
+
+    <!-- 다른 예약 항목 추가 가능 -->
+    <div class="ticket">
+        <div class="ticket-header">
+            <div>진에어 (JL0262)</div>
+            <div>2024.12.06 (금)</div>
+        </div>
+        <div class="ticket-body">
+            <div class="ticket-info">
+                <span><strong>출발:</strong> 09:30 FUK</span>
+                <span><strong>도착:</strong> 11:00 ICN</span>
+                <span><strong>소요시간:</strong> 1시간 30분</span>
+            </div>
+            <div class="ticket-info">
+                <span><strong>운항 상태:</strong> 확인필요</span>
+                <span><strong>무료수하물:</strong> 15.0kg</span>
+            </div>
+        </div>
+        <div class="ticket-footer">
+            <button class="booking-button">예약하기</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

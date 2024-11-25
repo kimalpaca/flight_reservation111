@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="/Login.css">
+</head>
+<body>
+<div class="login-container">
+    <h1>LOGIN</h1>
+    <form action="/login" method="POST">
+        <div class="input-group">
+            <span class="icon">👤</span>
+            <input type="text" id="username" name="username" placeholder="아이디" required>
+        </div>
+        <div class="input-group">
+            <span class="icon">🔒</span>
+            <input type="password" id="password" name="password" placeholder="비밀번호" required>
+        </div>
+        <div class="additional-links">
+            <a href="/forgot-password">비밀번호를 잃어버렸습니까?</a>
+        </div>
+        <div class="button-group">
+            <button type="submit" class="login-btn">로그인</button>
+            <button type="button" class="signup-btn" onclick="window.location.href='/signup'">회원가입</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

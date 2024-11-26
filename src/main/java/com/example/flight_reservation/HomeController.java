@@ -9,7 +9,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String index() {
-        return "index"; // templates/index.html을 반환
+        return "mainscreen"; // templates/index.html을 반환
     }
 
 }

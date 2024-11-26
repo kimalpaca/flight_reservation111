@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/reservation")
 public class ReservationController {
 
-    @GetMapping
+    @GetMapping("/reservation")
     public String reservationPage() {
         return "reservation"; // reservation.html 렌더링
     }

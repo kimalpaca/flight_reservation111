@@ -1,0 +1,146 @@
+/* 기본 스타일 */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+
+
+/* 소셜 미디어 링크 스타일 */
+.social-links {
+  position: absolute; /* 위치를 고정 */
+  left: 20px; /* 왼쪽 여백 */
+  bottom: 20px; /* 아래 여백 */
+  display: flex;
+  flex-direction: column; /* 아이콘을 세로로 배치 */
+  align-items: center; /* 중앙 정렬 */
+  gap: 15px; /* 아이콘 간 간격 설정 */
+  z-index: 10; /* 배경보다 앞에 위치 */
+}
+
+
+.social-links a {
+  text-decoration: none; /* 링크의 기본 스타일 제거 */
+}
+.social-links a img {
+  width: 50px; /* 아이콘 크기 */
+  height: 50px; /* 아이콘 크기 */
+  cursor: pointer; /* 마우스 커서 포인터로 변경 */
+  transition: transform 0.3s; /* 호버 시 애니메이션 효과 추가 */
+  margin-bottom: 15px;
+}
+
+.social-links a img:hover {
+  transform: scale(1.2); /* 호버 시 확대 효과 */
+}
+
+/* 상단 메뉴바 투명하게 설정 및 왼쪽 여백 추가 */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  background: transparent; /* 배경 투명 처리 */
+}
+
+header .logo {
+  font-size: 30px;
+  font-weight: bold;
+
+}
+
+header nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  margin: 0 15px;
+  padding-right: 50px; /* 왼쪽 여백 추가 */
+
+}
+
+header nav a:hover {
+  text-decoration: underline;
+  transform: scale(1.2); /* 호버 시 확대 효과 */
+
+}
+
+.hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden; /* 초과되는 부분 숨김 */
+}
+
+.hero-slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 1;
+}
+
+.hero-slides .slide {
+  min-width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1s ease-in-out;
+  opacity: 0; /* 기본적으로 숨김 */
+  position: absolute;
+}
+
+.hero-slides .slide.active {
+  opacity: 1; /* 활성화된 슬라이드만 표시 */
+  z-index: 2;
+}
+
+/* 세로로 흰 줄 추가 */
+.vertical-line {
+  position: absolute;
+  left: 50px; /* 왼쪽에서 띄운 값 */
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background-color: white;
+}
+
+  .hero-text {
+    z-index: 10;
+    position: relative;
+    text-align: left;
+    color: white;
+    padding-left: 90px;
+    padding-bottom: 350px;
+    top: 300px; /* 아래로 50px 이동 */
+    left: 50px; /* 오른쪽으로 30px 이동 */
+}
+
+.hero h1 {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 24px;
+}
+
+/* 소셜 미디어 링크 */
+.social-links {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  writing-mode: vertical-rl;
+  font-size: 14px;
+}
+
+.social-links a {
+  color: white;
+  text-decoration: none;
+  margin-bottom: 10px;
+}

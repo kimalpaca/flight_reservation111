@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,22 +8,22 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-image: url('background2.jpg');
+            background-image: url('/background2.jpg');
             background-size: cover;
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-attachment: scroll;
             background-position: center;
-            padding: 20px; /* 배경 이미지를 테두리로 보이게 설정 */
-
-
+            padding: 20px;
         }
         .form-container {
             width: 50%; /* 큰 틀의 가로 크기 설정 */
-            margin: 40px auto; /* 윗부분 여백과 수평 가운데 정렬 */
-            padding: 20px; /* 내부 여백 추가 */
-            background-color: #fff; /* 큰 틀 배경색 */
-            border-radius: 15px; /* 모서리를 둥글게 */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-height: 70vh; /* 스크롤 가능하도록 설정 */
+            overflow-y: auto; /* 스크롤 활성화 */
         }
         table {
             width: 100%;
@@ -36,15 +36,15 @@
             text-align: left;
         }
         th {
-            background-color: #003366; /* 진한 남색 */
+            background-color: #003366;
             color: #fff;
         }
         input[type="text"], select {
-            width: 15%; /* 가로 길이 조정 */
+            width: 15%;
             padding: 5px;
             margin: 5px 0;
-            border: 1px solid #ccc; /* 입력창 테두리 */
-            border-radius: 5px; /* 입력창 모서리를 둥글게 */
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
         .form-section {
             margin-bottom: 30px;
@@ -53,14 +53,14 @@
             font-size: 18px;
             margin-bottom: 10px;
             font-weight: bold;
-            color: #003366; /* 진한 남색 */
+            color: #003366;
         }
         .button {
             display: block;
             width: 200px;
             padding: 10px;
             margin: 20px auto;
-            background-color: #003366; /* 진한 남색 */
+            background-color: #003366;
             color: #fff;
             text-align: center;
             text-decoration: none;
@@ -68,161 +68,103 @@
             font-size: 16px;
         }
         .button:hover {
-            background-color: #002244; /* 더 어두운 남색 */
+            background-color: #002244;
         }
     </style>
+
 </head>
 <body>
-<div class="form-container">
+<div id="dynamicFormContainer"></div> <!-- 동적 입력 필드 컨테이너 -->
 
-    <div class="form-section">
-        <div class="form-title">성인 1</div>
-        <table>
-            <tr>
-                <th>성별</th>
-                <td>
-                    <input type="radio" name="adult1_gender" value="male"> 남자
-                    <input type="radio" name="adult1_gender" value="female"> 여자
-                </td>
-            </tr>
-            <tr>
-                <th>이름</th>
-                <td>
-                    <input type="text" placeholder="성" style="width: 10%;">
-                    <input type="text" placeholder="이름" style="width: 20%;">
-                </td>
-            </tr>
-            <tr>
-                <th>영어 이름</th>
-                <td>
-                    <input type="text" placeholder="성(영문)" style="width: 10%;">
-                    <input type="text" placeholder="이름" style="width: 20%;">
-                </td>
-            </tr>
-            <tr>
-                <th>생년월일</th>
-                <td>
-                    <select>
-                        <option>년도</option>
-                        <!-- 1924년부터 2024년까지 -->
-                        <script>
-                            for (let year = 1924; year <= 2024; year++) {
-                                document.write(`<option value="${year}">${year}</option>`);
-                            }
-                        </script>
-                    </select>
-                    <select>
-                        <option>월</option>
-                        <!-- 1월부터 12월까지 -->
-                        <script>
-                            for (let month = 1; month <= 12; month++) {
-                                document.write(`<option value="${month}">${month}월</option>`);
-                            }
-                        </script>
-                    </select>
-                    <select>
-                        <option>일</option>
-                        <!-- 1일부터 31일까지 -->
-                        <script>
-                            for (let day = 1; day <= 31; day++) {
-                                document.write(`<option value="${day}">${day}일</option>`);
-                            }
-                        </script>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>여권번호</th>
-                <td>
-                    <input type="text" placeholder="여권번호">
-                </td>
-            </tr>
-            <tr>
-                <th>연락처</th>
-                <td>
-                    <input type="text" placeholder="연락처">
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
-
-<div class="form-container">
-    <div class="form-section">
-        <div class="form-title">성인 2</div>
-        <table>
-            <tr>
-                <th>성별</th>
-                <td>
-                    <input type="radio" name="adult2_gender" value="male"> 남자
-                    <input type="radio" name="adult2_gender" value="female"> 여자
-                </td>
-            </tr>
-            <tr>
-                <th>이름</th>
-                <td>
-                    <input type="text" placeholder="성" style="width: 10%;">
-                    <input type="text" placeholder="이름" style="width: 20%;">
-                </td>
-            </tr>
-            <tr>
-                <th>영어 이름</th>
-                <td>
-                    <input type="text" placeholder="성(영문)" style="width: 10%;">
-                    <input type="text" placeholder="이름" style="width: 20%;">
-                </td>
-            </tr>
-            <tr>
-                <th>생년월일</th>
-                <td>
-                    <select>
-                        <option>년도</option>
-                        <!-- 1924년부터 2024년까지 -->
-                        <script>
-                            for (let year = 1924; year <= 2024; year++) {
-                                document.write(`<option value="${year}">${year}</option>`);
-                            }
-                        </script>
-                    </select>
-                    <select>
-                        <option>월</option>
-                        <!-- 1월부터 12월까지 -->
-                        <script>
-                            for (let month = 1; month <= 12; month++) {
-                                document.write(`<option value="${month}">${month}월</option>`);
-                            }
-                        </script>
-                    </select>
-                    <select>
-                        <option>일</option>
-                        <!-- 1일부터 31일까지 -->
-                        <script>
-                            for (let day = 1; day <= 31; day++) {
-                                document.write(`<option value="${day}">${day}일</option>`);
-                            }
-                        </script>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>여권번호</th>
-                <td>
-                    <input type="text" placeholder="여권번호">
-                </td>
-            </tr>
-            <tr>
-                <th>연락처</th>
-                <td>
-                    <input type="text" placeholder="연락처">
-                </td>
-            </tr>
-        </table>
-    </div>
-
-
-</div>
 <a href="#" class="button">무통장입금</a>
 
+<script th:inline="javascript">
+    // 서버에서 전달된 데이터 가져오기
+    const adultCount = /*[[${adultCount}]]*/ 0;
+    const teenCount = /*[[${teenCount}]]*/ 0;
+    const childCount = /*[[${childCount}]]*/ 0;
 
+    const formContainer = document.getElementById("dynamicFormContainer");
+
+    function createFormSection(type, index) {
+        return `
+        <div class="form-container">
+            <div class="form-section">
+                <div class="form-title">${type} ${index + 1}</div>
+                <table>
+                    <tr>
+                        <th>성별</th>
+                        <td>
+                            <input type="radio" name="${type}${index}_gender" value="male"> 남자
+                            <input type="radio" name="${type}${index}_gender" value="female"> 여자
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>이름</th>
+                        <td>
+                            <input type="text" placeholder="성" style="width: 10%;">
+                            <input type="text" placeholder="이름" style="width: 20%;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>영어 이름</th>
+                        <td>
+                            <input type="text" placeholder="성(영문)" style="width: 10%;">
+                            <input type="text" placeholder="이름" style="width: 20%;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>생년월일</th>
+                        <td>
+                            <select>
+                                <option>년도</option>
+                                ${Array.from({ length: 101 }, (_, i) => {
+                                    const year = 1924 + i;
+                                    return `<option value="${year}">${year}</option>`;
+                                }).join('')}
+                            </select>
+                            <select>
+                                <option>월</option>
+                                ${Array.from({ length: 12 }, (_, i) => `<option value="${i + 1}">${i + 1}월</option>`).join('')}
+                            </select>
+                            <select>
+                                <option>일</option>
+                                ${Array.from({ length: 31 }, (_, i) => `<option value="${i + 1}">${i + 1}일</option>`).join('')}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>여권번호</th>
+                        <td>
+                            <input type="text" placeholder="여권번호">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>연락처</th>
+                        <td>
+                            <input type="text" placeholder="연락처">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        `;
+    }
+
+    // 성인 입력창 생성
+    for (let i = 0; i < adultCount; i++) {
+        formContainer.innerHTML += createFormSection('성인', i);
+    }
+
+    // 청소년 입력창 생성
+    for (let i = 0; i < teenCount; i++) {
+        formContainer.innerHTML += createFormSection('청소년', i);
+    }
+
+    // 유아 입력창 생성
+    for (let i = 0; i < childCount; i++) {
+        formContainer.innerHTML += createFormSection('유아', i);
+    }
+</script>
 </body>
 </html>

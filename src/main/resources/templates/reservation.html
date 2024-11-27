@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
@@ -30,7 +30,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('background.jpg');
+            background-image: url('background2.jpg');
             background-size: cover;
             background-position: center;
             filter: blur(8px);
@@ -378,9 +378,8 @@
             </div>
             <div class="price-info">
                 <ul>
-                    <li>성인 1인당 Economy석 가격: 30,000원</li>
-                    <li>청소년 1인당 Economy석 가격: 30,000원</li>
-                    <li>유아 1인당 Economy석 가격: 30,000원</li>
+                    <li>청소년 1인당 가격: -30,000원</li>
+                    <li>유아 1인당 가격: -50,000원</li>
                 </ul>
 
             </div>
@@ -399,8 +398,12 @@
             <option value="First">First</option>
         </select>
     </div>
-
-    <button class="btn-reserve" id="reserveButton">검색하기</button>
+    <form action="/reservation/reserve" method="post" id="reservationForm">
+        <input type="hidden" name="adultCount" id="hiddenAdultCount" value="0">
+        <input type="hidden" name="teenCount" id="hiddenTeenCount" value="0">
+        <input type="hidden" name="childCount" id="hiddenChildCount" value="0">
+        <button class="btn-reserve" id="reserveButton">예약하기</button>
+    </form>
 </div>
 
 <div class="images-container" id="imagesContainer">
@@ -419,9 +422,11 @@
     const teenCountElement = document.getElementById('teenCount');
     const childCountElement = document.getElementById('childCount');
 
-    let adultCount = 0;
+    let adultCount = 1;
     let teenCount = 0;
     let childCount = 0;
+    adultCountElement.textContent = adultCount;
+
 
     passengersButton.addEventListener('click', () => {
         passengerPopup.style.display = passengerPopup.style.display === 'block' ? 'none' : 'block';
@@ -553,6 +558,13 @@
             destinationImage.style.transform = 'none';
         }
     });
+
+    document.getElementById('reserveButton').addEventListener('click', function () {
+        document.getElementById('hiddenAdultCount').value = adultCount;
+        document.getElementById('hiddenTeenCount').value = teenCount;
+        document.getElementById('hiddenChildCount').value = childCount;
+    });
 </script>
+
 </body>
 </html>

@@ -5,8 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
     <link rel="stylesheet" href="/css/Login.css">
+    <style>
+        /* 공통 헤더 스타일 */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            color: black; /* 글씨 색상을 검정으로 설정 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: black; /* 글씨 색상을 검정으로 설정 */
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo:hover {
+            text-decoration: underline;
+        }
+
+        .login-container {
+            margin-top: 50px; /* 고정 헤더 아래로 컨텐츠 이동 */
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
+<!-- 공통 헤더 -->
+<div class="header">
+    <a href="/" class="logo">Flight Reservation</a>
+</div>
+
 <div class="login-container">
     <h1>LOGIN</h1>
     <form action="/login" method="POST">

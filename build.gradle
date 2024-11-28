@@ -18,12 +18,25 @@ repositories {
 }
 
 dependencies {
+	// Spring Boot 스타터 의존성
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// Hibernate (Spring Boot 3.x와 호환되는 버전)
+	implementation 'org.hibernate.orm:hibernate-core:6.2.13.Final'
+
+	// MySQL 커넥터
+	runtimeOnly 'mysql:mysql-connector-java:8.0.29'
+
+	// Lombok 의존성
+	compileOnly 'org.projectlombok:lombok:1.18.24'
+	annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+	// 테스트 의존성
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
-
 
 tasks.named('test') {
 	useJUnitPlatform()

@@ -3,71 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./payment.css">
     <title>결제 완료</title>
-    <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #0a1733;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #ffffff;
-        }
 
-        .summary-container {
-            background-color: transparent;
-            padding: 40px;
-            max-width: 800px;
-            width: 100%;
-            text-align: left;
-        }
-
-        .price {
-            font-size: 32px;
-            font-weight: bold;
-            color: #00aaff;
-            margin-bottom: 10px;
-        }
-
-        .info {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .info .separator {
-            color: rgba(255, 255, 255, 0.5);
-            margin: 0 10px;
-        }
-
-        .flight-details {
-            font-size: 18px;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .date-details {
-            font-size: 18px;
-            text-align: right;
-            line-height: 1.6;
-        }
-    </style>
 </head>
 <body>
-<div class="summary-container">
-    <div class="price" id="price">170,000원</div>
-    <div class="info">
-        <span id="passenger">성인 1명</span>
-        <span class="separator">|</span>
-        <span id="seat">일반석</span>
+
+<div class="logo">Flight Reservation</div>
+<div class="container">
+    <div class="title-container">
+        <div class="title">예약 완료</div>
+        <div class="subtitle">아래 계좌정보로 입금해 주시면 결제 완료 처리됩니다.</div>
     </div>
-    <div class="flight-details">
-        <div id="route">인천 - 후쿠오카</div>
+
+    <!-- 남색 컨테이너 -->
+    <div class="navy-container">
+        <div class="navy-text" style="text-align: left; line-height: 1.9;">
+            <div style="font-size: 24px; font-weight: bold; margin-bottom: 40px;">Flight Reservation</div>
+            <div class="line"></div>
+            <div style="font-size: 24px; font-weight: bold; margin-top: 60px;">가상계좌 정보</div>
+            <div style="font-size: 16px; color: rgba(255, 255, 255, 0.7); margin-top: 30px;  margin-bottom: 10px;">계좌정보</div>
+            <div style="font-size: 18px; font-weight: bold; margin-bottom: 1px;">- 국민은행 60519014678208</div>
+            <div style="font-size: 18px; font-weight: bold;">- 예금주: Flight Reservation</div>
+            <div style="font-size: 16px; color: rgba(255, 255, 255, 0.7); margin-top: 70px;">입금 기간</div>
+            <div style="font-size: 18px; font-weight: bold;">2024년 12월 9일 까지</div>
+
+        </div>
     </div>
-    <div class="date-details">
-        <div id="date">2024.12.04 (수) - 2024.12.06 (금)</div>
+
+
+    <div class="summary-container">
+        <div class="price" id="price">170,000원</div>
+        <div class="info">
+            <span id="passenger">성인 1명</span>
+            <span class="separator">|</span>
+            <span id="seat">일반석</span>
+        </div>
+        <div class="flight-details">
+            <div id="route">인천 - 후쿠오카</div>
+        </div>
+        <div class="date-details">
+            <div id="date">2024.12.04 (수) - 2024.12.06 (금)</div>
+        </div>
     </div>
 </div>
 

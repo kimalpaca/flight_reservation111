@@ -5,126 +5,175 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>예약 리스트</title>
     <style>
-        /* 기본 스타일 */
         body {
-          font-family: Arial, sans-serif;
-          margin: 0;
-          padding: 0;
-          background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('background14.jpg'); /* 배경 이미지 경로 */
+            background-size: cover; /* 이미지를 화면 크기에 맞춤 */
+            background-position: center; /* 이미지 위치를 중앙에 고정 */
+            background-repeat: no-repeat; /* 이미지 반복 방지 */
+
+            display: flex; /* 플렉스 컨테이너로 설정 */
+            justify-content: center; /* 가로 중앙 정렬 */
+            align-items: center; /* 세로 중앙 정렬 */
+            height: 100vh; /* 화면 전체 높이 사용 */
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* 텍스트를 왼쪽 정렬 */
+            padding: 10px 20px;
+            color: black; /* 텍스트 색상 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: none; /* 배경 제거 */
+            box-shadow: none; /* 그림자 제거 */
+        }
+
+        .logo {
+            text-decoration: none;
+            color: black; /* 텍스트 색상 */
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo:hover {
+            text-decoration: underline;
+        }
+
+        .tickets-wrapper {
+            display: flex;
+            flex-direction: column; /* 티켓을 세로로 정렬 */
+            gap: 20px; /* 티켓 사이 간격 */
+            margin-top: 80px; /* 헤더 아래로 이동 */
         }
 
         .ticket-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 20px;
-        }
-
-        .ticket {
-          width: 80%;
-          max-width: 800px;
-          background-color: #ffffff;
-          border: 2px solid #ddd;
-          border-radius: 10px;
-          margin: 10px 0;
-          padding: 20px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          display: flex;
-          flex-direction: column;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* 티켓 간 간격 추가 */
+            padding: 30px;
+            background-image: url('ticket2.png'); /* 티켓 이미지 경로 */
+            background-size: cover; /* 이미지가 티켓에 맞도록 조정 */
+            background-position: center; /* 이미지 중앙 정렬 */
+            background-repeat: no-repeat; /* 이미지 반복 방지 */
+            width: 800px;
+            height: 310px;
         }
 
         .ticket-header {
-          display: flex;
-          justify-content: space-between;
-          font-size: 18px;
-          font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            color: #70535D;
+            font-weight: bold;
+            margin-top: 80px;
+            margin-right: 640px;
         }
 
         .ticket-body {
-          display: flex;
-          justify-content: space-between;
-          padding-top: 15px;
-          font-size: 16px;
-        }
-
-        .ticket-footer {
-          display: flex;
-          justify-content: flex-end;
-          padding-top: 15px;
-          font-size: 14px;
-          font-weight: bold;
-          color: #333;
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            color: #70535D;
+            margin-right: 60px;
+            margin-top: 20px;
         }
 
         .ticket-info {
-          flex: 1;
+            flex: 1;
+            margin-right: 220px;
         }
 
         .ticket-info span {
-          display: block;
+            display: block;
+            margin-bottom: 10px; /* 아래쪽 간격 10px */
+            white-space: nowrap; /* 줄바꿈 방지 */
         }
 
-        .booking-button {
-          padding: 10px 20px;
-          background-color: #4CAF50;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
+        .barcode {
+            position: absolute; /* 절대 위치 설정 */
+            top: 380px; /* 티켓 위쪽에서 10px 아래로 */
+            right: 920px; /* 티켓 오른쪽에서 20px 안쪽으로 */
+            width: 150px; /* 바코드 전체 너비 */
+            height: auto; /* 비율 유지 */
+            z-index: 10; /* 티켓 위에 덮이도록 레이어 우선순위 설정 */
         }
 
-        .booking-button:hover {
-          background-color: #45a049;
+        .barcode img {
+            width: 100%; /* 바코드 너비 조정 */
+            height: auto; /* 비율 유지 */
         }
 
+        .barcode2 {
+            position: absolute; /* 절대 위치 설정 */
+            top: 770px; /* 티켓 위쪽에서 10px 아래로 */
+            right: 920px; /* 티켓 오른쪽에서 20px 안쪽으로 */
+            width: 150px; /* 바코드 전체 너비 */
+            height: auto; /* 비율 유지 */
+            z-index: 10; /* 티켓 위에 덮이도록 레이어 우선순위 설정 */
+        }
+
+        .barcode2 img {
+            width: 100%; /* 바코드 너비 조정 */
+            height: auto; /* 비율 유지 */
+        }
     </style>
 </head>
 <body>
+<!-- 공통 헤더 -->
+<div class="header">
+    <a href="/" class="logo">Flight Reservation</a>
+</div>
 
-<div class="ticket-container">
-    <div class="ticket">
+<div class="tickets-wrapper">
+    <div class="ticket-container">
         <div class="ticket-header">
-            <div>진에어 (JL0265)</div>
-            <div>2024.12.04 (수)</div>
+            <div>Flight Reservation</div>
         </div>
         <div class="ticket-body">
             <div class="ticket-info">
-                <span><strong>출발:</strong> 17:20 ICN</span>
-                <span><strong>도착:</strong> 18:45 FUK</span>
-                <span><strong>소요시간:</strong> 1시간 25분</span>
+                <span><strong>출발: ICN인천</strong> </span>
+                <span><strong>도착: 도쿄</strong> </span>
+                <span><strong>날짜:2024-12-02</strong> </span>
             </div>
             <div class="ticket-info">
-                <span><strong>운항 상태:</strong> 확인필요</span>
-                <span><strong>무료수하물:</strong> 15.0kg</span>
+                <span><strong>이름: 정영빈</strong></span>
+                <span><strong>좌석: first</strong></span>
+                <span><strong>여권번호: M14520314</strong></span>
             </div>
         </div>
-        <div class="ticket-footer">
-            <button class="booking-button">예약하기</button>
+        <div class="barcode">
+            <img src="barcode.png" alt="바코드" />
         </div>
     </div>
 
-    <!-- 다른 예약 항목 추가 가능 -->
-    <div class="ticket">
+    <div class="ticket-container">
         <div class="ticket-header">
-            <div>진에어 (JL0262)</div>
-            <div>2024.12.06 (금)</div>
+            <div>Flight Reservation</div>
         </div>
         <div class="ticket-body">
             <div class="ticket-info">
-                <span><strong>출발:</strong> 09:30 FUK</span>
-                <span><strong>도착:</strong> 11:00 ICN</span>
-                <span><strong>소요시간:</strong> 1시간 30분</span>
+                <span><strong>출발: ICN인천</strong> </span>
+                <span><strong>도착: 도쿄</strong> </span>
+                <span><strong>날짜:2024-12-02</strong> </span>
             </div>
             <div class="ticket-info">
-                <span><strong>운항 상태:</strong> 확인필요</span>
-                <span><strong>무료수하물:</strong> 15.0kg</span>
+                <span><strong>이름: 김하늘</strong></span>
+                <span><strong>좌석: first</strong></span>
+                <span><strong>여권번호: M89372819</strong></span>
             </div>
-        </div>
-        <div class="ticket-footer">
-            <button class="booking-button">예약하기</button>
+            <div class="barcode2">
+                <img src="barcode2.png" alt="바코드" />
+            </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/payment.css">
+    <title>결제 완료</title>
+
+</head>
+<body>
+
+<div class="logo">Flight Reservation</div>
+<div class="container">
+    <div class="title-container">
+        <div class="title">예약 완료</div>
+        <div class="subtitle">아래 계좌정보로 입금해 주시면 결제 완료 처리됩니다.</div>
+    </div>
+
+    <!-- 남색 컨테이너 -->
+    <div class="navy-container">
+        <div class="navy-text" style="text-align: left; line-height: 1.9;">
+            <div style="font-size: 24px; font-weight: bold; margin-bottom: 40px;">Flight Reservation</div>
+            <div class="line"></div>
+            <div style="font-size: 24px; font-weight: bold; margin-top: 60px;">가상계좌 정보</div>
+            <div style="font-size: 16px; color: rgba(255, 255, 255, 0.7); margin-top: 30px;  margin-bottom: 10px;">계좌정보</div>
+            <div style="font-size: 18px; font-weight: bold; margin-bottom: 1px;">- 국민은행 60519014678208</div>
+            <div style="font-size: 18px; font-weight: bold;">- 예금주: Flight Reservation</div>
+            <div style="font-size: 16px; color: rgba(255, 255, 255, 0.7); margin-top: 70px;">입금 기간</div>
+            <div style="font-size: 18px; font-weight: bold;">2024년 12월 9일 까지</div>
+
+        </div>
+    </div>
+
+
+    <div class="summary-container">
+        <div class="price" id="price">170,000원</div>
+        <div class="info">
+            <span id="passenger">성인 1명</span>
+            <span class="separator">|</span>
+            <span id="seat">일반석</span>
+        </div>
+        <div class="flight-details">
+            <div id="route">인천 - 후쿠오카</div>
+        </div>
+        <div class="date-details">
+            <div id="date">2024.12.04 (수) - 2024.12.06 (금)</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 메인 예약 페이지에서 받은 데이터를 가져옴
+    const reservationDetails = JSON.parse(localStorage.getItem('reservationDetails'));
+
+    if (reservationDetails) {
+        document.getElementById('price').textContent = reservationDetails.price;
+        document.getElementById('passenger').textContent = reservationDetails.passenger;
+        document.getElementById('seat').textContent = reservationDetails.seat;
+        document.getElementById('route').textContent = `${reservationDetails.departure} - ${reservationDetails.destination}`;
+        document.getElementById('date').textContent = reservationDetails.date;
+    }
+</script>
+</body>
+</html>

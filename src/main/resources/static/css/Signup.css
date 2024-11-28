@@ -2,7 +2,10 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    background-image: url('/background14.jpg'); /* 배경 이미지 경로 */
+    background-size: cover; /* 이미지를 화면 크기에 맞춤 */
+    background-position: center; /* 이미지 위치를 중앙에 고정 */
+    background-repeat: no-repeat; /* 이미지 반복 방지 */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +14,7 @@ body {
 
 /* 회원가입 컨테이너 */
 .signup-container {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.9); /* 투명도 추가 */
     border-radius: 10px;
     padding: 30px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -60,15 +63,16 @@ h1 {
 .signup-btn {
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #001f5b; /* 남색으로 변경 */
     color: white;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
     margin-top: 20px;
+    transition: background-color 0.3s ease; /* 부드러운 효과 추가 */
 }
 
 .signup-btn:hover {
-    background-color: #45a049;
+    background-color: #00194a; /* Hover 시 색상 어둡게 변경 */
 }

@@ -7,6 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>항공 예약 시스템</title>
     <style>
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* 텍스트를 왼쪽 정렬 */
+            padding: 10px 20px;
+            color: black; /* 텍스트 색상 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: none; /* 배경 제거 */
+            box-shadow: none; /* 그림자 제거 */
+        }
+
+        .logo {
+            text-decoration: none;
+            color: black; /* 텍스트 색상 */
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo:hover {
+            text-decoration: underline;
+        }
+
 
         body, h1, h2, h3, p, li, button, select, input {
             font-family: 'Roboto', Arial, sans-serif; /* Roboto를 모든 텍스트에 적용 */
@@ -309,6 +335,10 @@
     </style>
 </head>
 <body>
+<div class="header">
+    <a href="/" class="logo">Flight Reservation</a>
+</div>
+
 <div class="container">
     <div class="item">
         <label for="departure">출발지</label>

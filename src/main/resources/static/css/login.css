@@ -2,7 +2,10 @@
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background-image: url('background14.jpg'); /* 배경 이미지 경로 */
+            background-size: cover; /* 이미지를 화면 크기에 맞춤 */
+            background-position: center; /* 이미지 위치를 중앙에 고정 */
+            background-repeat: no-repeat; /* 이미지 반복 방지 */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +14,7 @@ body {
 
 /* 로그인 컨테이너 */
 .login-container {
-    background-color: #555;
+    background-color: #001a33; /* 진한 남색 */
     border-radius: 25px;
     padding: 2.5rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -32,7 +35,7 @@ h1 {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
-    background-color: #777;
+    background-color: white;
     border-radius: 15px;
     padding: 0.5rem;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -43,7 +46,7 @@ h1 {
     border: none;
     outline: none;
     background: none;
-    color: white;
+    color: black;
     padding-left: 10px;
     font-size: 1rem;
 }
